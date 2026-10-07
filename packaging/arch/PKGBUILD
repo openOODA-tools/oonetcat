@@ -1,0 +1,21 @@
+# Maintainer: openOODA-tools <ops@openooda.org>
+pkgname=oonetcat-bin
+_pkgname=oonetcat
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="Capability-isolated socket communicator for port inspection and raw byte exchange."
+arch=('x86_64')
+url="https://github.com/openOODA-tools/oonetcat"
+license=('Apache-2.0')
+depends=('glibc')
+provides=('oonetcat')
+conflicts=('oonetcat')
+source_x86_64=("${url}/releases/download/v${pkgver}/oonetcat-linux-x86_64"
+               "uninstall.sh::https://raw.githubusercontent.com/openOODA-tools/${_pkgname}/v${pkgver}/uninstall.sh")
+sha256sums_x86_64=('SKIP'
+                   'SKIP')
+
+package() {
+    install -Dm755 "${srcdir}/oonetcat-linux-x86_64" "${pkgdir}/usr/bin/oonetcat"
+    install -Dm755 uninstall.sh "${pkgdir}/usr/bin/oonetcat-uninstall"
+}
